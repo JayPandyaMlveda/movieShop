@@ -12,12 +12,31 @@ export const login = ({ email, password }) =>
     })
     .then((res) => res.data);
 
-export const signup = ({ email, password, age, name }) =>
-    instance
-    .post("/auth/signup", {
-        email,
-        password,
-        age,
-        name
-    })
-    .then((res) => res.data);
+export const signup = ({ email, password, age, name }) => {
+    return instance
+        .post("/auth/signup", {
+            email,
+            password,
+            age,
+            name,
+        })
+        .then((res) => res.data);
+};
+
+export const getMovie = () => {
+    return instance
+        .get("/movies", {
+            params: {
+                sort: "year",
+                sortOrder: "desc",
+            },
+        })
+        .then((res) => res.data);
+};
+
+export const storeJwt = (token) => {
+    instance.interceptors.request.use((req) => {
+        req.headers.Authorization = `Bearer ${token}`;
+        return req;
+    });
+};

@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../apiCalls";
+import { login, storeJwt } from "../../apiCalls";
 import { UserContext } from "../../contexts/user.context";
 
 function LoginPage() {
@@ -12,7 +12,7 @@ function LoginPage() {
 
   const { isLoading, mutate } = useMutation(login, {
     onError: (error) => {
-      if (error instanceof AxiosError && error.response?.status == 401) {
+      if (error instanceof AxiosError && error.response?.status === 401) {
         setEmailError("Invalid email or Password");
       } else {
         setEmailError("Something went wrong");
@@ -20,7 +20,9 @@ function LoginPage() {
     },
     onSuccess: (data) => {
       setUser(data);
+      storeJwt(data.token);
       navigate("/");
+
     },
   });
   const [email, setEmail] = useState("");
@@ -52,7 +54,7 @@ function LoginPage() {
     >
       <form noValidate onSubmit={onSubmit}>
         <div className="form-outline mb-4">
-          <label className="form-label" for="exampleInputEmail1">
+          <label className="form-label" htmlFor="exampleInputEmail1">
             Email address
           </label>
 
@@ -85,7 +87,7 @@ function LoginPage() {
         </div>
 
         <div className="form-outline mb-4">
-          <label className="form-label" for="exampleInputPassword1">
+          <label className="form-label" htmlFor="exampleInputPassword1">
             Password
           </label>
           <input

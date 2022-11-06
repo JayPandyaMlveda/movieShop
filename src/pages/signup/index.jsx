@@ -46,7 +46,7 @@ function SignUpPage() {
     >
       <form noValidate onSubmit={onSubmit}>
         <div className="form-outline mb-4">
-          <label className="form-label" for="exampleInputName">
+          <label className="form-label" htmlFor="exampleInputName">
             Name
           </label>
           <input
@@ -69,7 +69,7 @@ function SignUpPage() {
           {nameError && <div className="invalid-feedback">{nameError}</div>}
         </div>
         <div className="form-outline mb-4">
-          <label className="form-label" for="exampleInputAge">
+          <label className="form-label" htmlFor="exampleInputAge">
             Age
           </label>
           <input
@@ -92,7 +92,7 @@ function SignUpPage() {
             {ageError && <div className="invalid-feedback">{ageError}</div>}
         </div>
         <div className="form-outline mb-4">
-          <label className="form-label" for="exampleInputEmail1">
+          <label className="form-label" htmlFor="exampleInputEmail1">
             Email address
           </label>
 
@@ -125,7 +125,7 @@ function SignUpPage() {
         </div>
 
         <div className="form-outline mb-4">
-          <label className="form-label" for="exampleInputPassword1">
+          <label className="form-label" htmlFor="exampleInputPassword1">
             Password
           </label>
           <input
