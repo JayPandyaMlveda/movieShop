@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login, signup } from "../../apiCalls";
+import { signup } from "../../apiCalls";
 
 function SignUpPage() {
   const [emailError, setEmailError] = useState();
@@ -10,7 +10,7 @@ function SignUpPage() {
 
   const { isLoading, mutate } = useMutation(signup, {
     onError: (error) => {
-      if (error instanceof AxiosError && error.response?.status == 401) {
+      if (error instanceof AxiosError && error.response?.status === 401) {
         setEmailError("Invalid email or Password");
       } else {
         setEmailError("Something went wrong");

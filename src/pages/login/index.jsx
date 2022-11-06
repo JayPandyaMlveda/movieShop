@@ -1,11 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../apiCalls";
+import { UserContext } from "../../contexts/user.context";
 
 function LoginPage() {
   const [emailError, setEmailError] = useState();
+  const [, setUser] = useContext(UserContext);
+  const navigate = useNavigate();
 
   const { isLoading, mutate } = useMutation(login, {
     onError: (error) => {
@@ -14,6 +17,10 @@ function LoginPage() {
       } else {
         setEmailError("Something went wrong");
       }
+    },
+    onSuccess: (data) => {
+      setUser(data);
+      navigate("/");
     },
   });
   const [email, setEmail] = useState("");
@@ -32,7 +39,15 @@ function LoginPage() {
 
   return (
     <div
-      style={{ marginInline: "auto", maxWidth: "500px", width: "100%" ,border:"1px solid", borderRadius:"7px",borderColor:"gray",padding:"27px"}}
+      style={{
+        marginInline: "auto",
+        maxWidth: "500px",
+        width: "100%",
+        border: "1px solid",
+        borderRadius: "7px",
+        borderColor: "gray",
+        padding: "27px",
+      }}
       className="mt-4"
     >
       <form noValidate onSubmit={onSubmit}>
