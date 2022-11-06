@@ -11,3 +11,13 @@ export const login = ({ email, password }) =>
         password,
     })
     .then((res) => res.data);
+
+export const signup = ({ email, password, age, name }) =>
+    instance
+    .post("/auth/signup", {
+        email,
+        password,
+        age,
+        name
+    })
+    .then((res) => res.data);

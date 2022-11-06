@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { login } from "../../apiCalls";
 
 function LoginPage() {
@@ -31,7 +32,7 @@ function LoginPage() {
 
   return (
     <div
-      style={{ marginInline: "auto", maxWidth: "500px", width: "100%" }}
+      style={{ marginInline: "auto", maxWidth: "500px", width: "100%" ,border:"1px solid", borderRadius:"7px",borderColor:"gray",padding:"27px"}}
       className="mt-4"
     >
       <form noValidate onSubmit={onSubmit}>
@@ -108,7 +109,7 @@ function LoginPage() {
 
         <div className="text-center">
           <p>
-            Not a member? <a href="#!">Register</a>
+            Not a member? <Link to="/signup">Register</Link>
           </p>
 
           <button type="button" className="btn btn-link btn-floating mx-1">
