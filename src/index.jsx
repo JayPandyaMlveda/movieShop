@@ -1,24 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom"
+import React, { Suspense } from "react";
+import { render } from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import App from "./App";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+render(
   <React.StrictMode>
     <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-    <App />
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+      <Suspense
+          fallback={
+            <div
+              style={{ width: "100vw", height: "100vh" }}
+              className="d-flex justify-content-center align-items-center"
+            >
+              <div className="spinner-border" role="status" />
+            </div>
+          }
+        >
+        <App />
+        </Suspense>
+      </QueryClientProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root"),
 );
